@@ -33,6 +33,11 @@ if ( !defined( 'SVSW_PLUGIN_PATH' ) ) {
     define( 'SVSW_PLUGIN_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 }
 
+// Define plugin base
+if ( !defined( 'SVSW_PLUGIN_BASE' ) ) {
+    define( 'SVSW_PLUGIN_BASE', plugin_basename( __FILE__ ) );
+}
+
 // Define plugin url
 if ( !defined( 'SVSW_PLUGIN_URL' ) ) {
     define( 'SVSW_PLUGIN_URL', untrailingslashit( plugin_dir_url( __FILE__ ) ) );
