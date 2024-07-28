@@ -45,3 +45,6 @@ function svsw_plugin_load_textdomain() {
     load_plugin_textdomain( 'simple-variation-swatches-woo', false, basename( dirname( __FILE__ ) ) . '/languages' );
 }
 add_action( 'plugins_loaded', 'svsw_plugin_load_textdomain' );
+
+// Include files.
+require_once SVSW_PLUGIN_PATH . '/loader.php';
