@@ -2,30 +2,34 @@
 
 class Term_Meta_Config {
 
-    /**
-     * Define Taxonomy
-     * @var string
-     */
+    // Define Taxonomy
     public $taxonomy;
 
     public function __construct() {
+        // Initialize the hooks
         $this->setup_hooks();
     }
 
     public function setup_hooks() {
-
-        // Get Taxonomy from $_REQUEST['taxonomy']
+        // Get the taxonomy from the request
         $this->taxonomy = isset( $_REQUEST['taxonomy'] ) ? sanitize_title( $_REQUEST['taxonomy'] ) : '';
 
-        // Add meta field on taxonomy add form
+        // Add the form field to the add form for the taxonomy
         add_action( $this->taxonomy . '_add_form_fields', [ $this, 'add_form_fields' ] );
 
-        // Add meta field on taxonomy edit form
-        add_action( $this->taxonomy . '_edit_form_fields', [ $this, 'edit_form_fields' ], 10 );
+        // Add the form field to the edit form for the taxonomy
+        add_action( $this->taxonomy . '_edit_form_fields', [ $this, 'add_form_fields' ], 10 );
+
+        // Save the term meta data when a term is created or edited
+        add_action( 'created_term', [ $this, 'save_term_meta' ], 10, 3 );
+        add_action( 'edited_term', [ $this, 'save_term_meta' ], 10, 3 );
+
+        // Enqueue color picker scripts and styles.
+        add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_color_picker' ] );
     }
 
     /**
-     * Get attribute type from database
+     * Get attribute type from the database
      *
      * @param string $name attribute name of product attribute.
      * @return mixed
@@ -37,14 +41,20 @@ class Term_Meta_Config {
         }
 
         global $wpdb;
-        $name = substr( $name, 3 );
-        // Required custom result from database, was not possible with regular WordPress call.
-        $type = $wpdb->get_var( $wpdb->prepare( 'SELECT attribute_type FROM ' . $wpdb->prefix . 'woocommerce_attribute_taxonomies WHERE attribute_name = %s', $name ) ); //phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+        $name = substr( $name, 3 ); // Strip the first 3 characters from the name
+        // Get the attribute type from the database
+        $type = $wpdb->get_var(
+            $wpdb->prepare(
+                'SELECT attribute_type FROM ' . $wpdb->prefix . 'woocommerce_attribute_taxonomies WHERE attribute_name = %s',
+                $name
+            )
+        );
+
         return is_null( $type ) ? '' : $type;
     }
 
     /**
-     * Term meta markup for add form
+     * Add form fields for the taxonomy add form
      *
      * @param object $term current term object.
      * @return void
@@ -53,6 +63,7 @@ class Term_Meta_Config {
     public function add_form_fields( $term ) {
         $type         = $this->get_attr_type_by_name( $this->taxonomy );
         $fields_array = $this->term_meta_fields( $type );
+
         if ( !empty( $fields_array ) ) {
             ?>
             <div class="form-field <?php echo esc_attr( $fields_array['id'] ); ?>">
@@ -66,7 +77,7 @@ class Term_Meta_Config {
     }
 
     /**
-     * Returns html markup for selected term meta type
+     * Generate the HTML markup for the term meta fields
      *
      * @param array  $field term meta type data array.
      * @param object $term current term data.
@@ -80,6 +91,7 @@ class Term_Meta_Config {
 
         $value = '';
         if ( is_object( $term ) && !empty( $term->term_id ) ) {
+            // Get the term meta value if it exists
             $value = get_term_meta( $term->term_id, 'svsw_' . $field['type'], true );
         }
 
@@ -94,7 +106,7 @@ class Term_Meta_Config {
     }
 
     /**
-     * Term meta fields array
+     * Define the term meta fields
      *
      * @param string $type term meta type.
      * @return array
@@ -115,6 +127,31 @@ class Term_Meta_Config {
         ];
 
         return isset( $fields[$type] ) ? $fields[$type] : [];
+    }
+
+    /**
+     * Save the term meta data
+     *
+     * @param int $term_id term ID.
+     * @param int $tt_id term taxonomy ID.
+     * @param string $taxonomy taxonomy slug.
+     * @return void
+     */
+    public function save_term_meta( $term_id, $tt_id, $taxonomy ) {
+        if ( isset( $_POST['svsw_color'] ) && $this->taxonomy === $taxonomy ) {
+            // Sanitize the color value
+            $color = sanitize_hex_color( $_POST['svsw_color'] );
+            // Update the term meta with the sanitized color value
+            update_term_meta( $term_id, 'svsw_color', $color );
+        }
+    }
+
+    /**
+     * Enqueue color picker scripts and styles
+     */
+    public function enqueue_color_picker() {
+        wp_enqueue_style( 'wp-color-picker' );
+        wp_enqueue_script( 'color-picker-init', SVSW_PLUGIN_URL . '/admin/assets/js/color-picker-init.js', array( 'wp-color-picker' ), false, true );
     }
 }
 
