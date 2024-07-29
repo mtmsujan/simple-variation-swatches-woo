@@ -42,7 +42,6 @@ class Config_Attributes {
                     'select' => esc_html__( 'Select', 'simple-variation-swatches-woo' ),
                     'color'  => esc_html__( 'Color', 'simple-variation-swatches-woo' ),
                     'label'  => esc_html__( 'Label', 'simple-variation-swatches-woo' ),
-                    'image'  => esc_html__( 'Image', 'simple-variation-swatches-woo' ),
                 ]
             );
         }
