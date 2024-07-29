@@ -21,6 +21,9 @@ class Config_Attributes {
 
         // Add preview column to taxonomy table.
         add_filter( 'manage_edit-' . $this->taxonomy . '_columns', [ $this, 'add_attribute_column' ] );
+
+        // Add preview markup to taxonomy table.
+        add_filter( 'manage_' . $this->taxonomy . '_custom_column', [ $this, 'add_preview_markup' ], 10, 3 );
     }
 
     /**
@@ -64,7 +67,7 @@ class Config_Attributes {
         }
 
         $attr_type = $this->get_attr_type_by_name( $this->taxonomy );
-        if ( !in_array( $attr_type, [ 'color', 'image' ], true ) ) {
+        if ( !in_array( $attr_type, [ 'color' ], true ) ) {
             return $columns;
         }
 
@@ -95,6 +98,35 @@ class Config_Attributes {
         // Required custom result from database, was not possible with regular WordPress call.
         $type = $wpdb->get_var( $wpdb->prepare( 'SELECT attribute_type FROM ' . $wpdb->prefix . 'woocommerce_attribute_taxonomies WHERE attribute_name = %s', $name ) ); //phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         return is_null( $type ) ? '' : $type;
+    }
+
+    /**
+     * Term type markup
+     *
+     * @param string $columns term columns.
+     * @param string $column current term column.
+     * @param id     $term_id current term id.
+     * @return mixed
+     * @since  1.0.0
+     */
+    public function add_preview_markup( $columns, $column, $term_id ) {
+        global $taxnow;
+
+        if ( $this->taxonomy !== $taxnow || 'preview' !== $column ) {
+            return $columns;
+        }
+
+        $attr_type = $this->get_attr_type_by_name( $this->taxonomy );
+        if ( !in_array( $attr_type, [ 'color' ], true ) ) {
+            return $columns;
+        }
+
+        switch ($attr_type) {
+            case 'color':
+                $color = get_term_meta( $term_id, 'svsw_color', true );
+                printf( '<div class="svsw-preview" style="background-color:%s;width:30px;height:30px;"></div>', esc_attr( $color ) );
+                break;
+        }
     }
 
 }
