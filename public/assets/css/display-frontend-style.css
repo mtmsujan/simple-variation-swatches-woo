@@ -24,3 +24,7 @@
 .svsw_label-swatch:hover{
     border-color: #000;
 }
+
+table.variations tr th.label label{
+    display: none;
+}
