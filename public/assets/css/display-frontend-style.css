@@ -7,4 +7,5 @@
 
 .svsw_color-swatch input[type="radio"] {
     opacity: 0;
+    visibility: hidden;
 }

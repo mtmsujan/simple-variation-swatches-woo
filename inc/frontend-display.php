@@ -43,16 +43,18 @@ class Frontend_Display {
             $html = '<div class="color-swatches">';
             foreach ( $terms as $term ) {
                 $color = get_term_meta( $term->term_id, 'svsw_color', true ); // Assuming color is saved as term meta
-                $html .= sprintf(
-                    '<label class="svsw_color-swatch" style="background-color: %s;">
-                        <input type="radio" name="%s" value="%s">
-                        %s
-                    </label>',
-                    esc_attr( $color ),
-                    esc_attr( $args['attribute'] ),
-                    esc_attr( $term->slug ),
-                    ''
-                );
+                if ( $color ) {
+                    $html .= sprintf(
+                        '<label class="svsw_color-swatch" style="background-color: %s;">
+                            <input type="radio" name="%s" value="%s">
+                            %s
+                        </label>',
+                        esc_attr( $color ),
+                        esc_attr( $args['attribute'] ),
+                        esc_attr( $term->slug ),
+                        ''
+                    );
+                }
             }
             $html .= '</div>';
         } else {
