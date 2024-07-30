@@ -1,0 +1,13 @@
+.svsw_color-swatches-container {
+    display: flex;
+    flex-flow: wrap;
+    padding: 0;
+    width: fit-content;
+    grid-gap: 8px;
+}
+
+.svsw_color-swatch {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}

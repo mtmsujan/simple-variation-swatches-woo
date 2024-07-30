@@ -48,7 +48,7 @@ class Frontend_Display {
                         '<div class="%s" style="background-color: %s"> %s </div>',
                         'svsw_color-swatch',
                         esc_attr( $color ),
-                        esc_html( $term->name )
+                        ''
                     );
                 }
             }
