@@ -8,7 +8,6 @@ class Frontend_Display {
 
     public function setup_hooks() {
         add_filter( 'woocommerce_dropdown_variation_attribute_options_html', [ $this, 'custom_variation_attribute_options_html' ], 10, 2 );
-
         add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_frontend_assets' ] );
     }
 
@@ -45,9 +44,10 @@ class Frontend_Display {
                 $color = get_term_meta( $term->term_id, 'svsw_color', true ); // Assuming color is saved as term meta
                 if ( $color ) {
                     $html .= sprintf(
-                        '<div class="%s" style="background-color: %s"> %s </div>',
+                        '<div class="%s" style="background-color: %s" data-value="%s"> %s </div>',
                         'svsw_color-swatch',
                         esc_attr( $color ),
+                        esc_attr( $term->slug ),
                         ''
                     );
                 }
@@ -57,10 +57,10 @@ class Frontend_Display {
             $html = '<div class="svsw_label-swatches-container">';
             foreach ( $terms as $term ) {
                 $html .= sprintf(
-                    '<div class="%s"> %s </div>',
+                    '<div class="%s" data-value="%s"> %s </div>',
                     'svsw_label-swatch',
+                    esc_attr( $term->slug ),
                     esc_html( $term->name )
-
                 );
             }
             $html .= '</div>';
@@ -71,7 +71,10 @@ class Frontend_Display {
 
     public function enqueue_frontend_assets() {
         // Enqueue frontend style css
-        wp_enqueue_style( "frontend-style", SVSW_PLUGIN_URL . "/public/assets/css/display-frontend-style.css", [], time(), "all" );
+        wp_enqueue_style( 'frontend-style', SVSW_PLUGIN_URL . '/public/assets/css/display-frontend-style.css', [], time(), 'all' );
+
+        // Enqueue frontend script
+        wp_enqueue_script( 'frontend-script', SVSW_PLUGIN_URL . '/public/assets/js/display-frontend-script.js', [ 'jquery' ], time(), true );
     }
 
     public function put_program_logs( $data ) {
@@ -93,13 +96,11 @@ class Frontend_Display {
 
         // Append new response data to the existing file
         if ( file_put_contents( $file_name, $data . "\n\n", FILE_APPEND | LOCK_EX ) !== false ) {
-            return "Data appended to file successfully.";
+            return 'Data appended to file successfully.';
         } else {
-            return "Failed to append data to file.";
+            return 'Failed to append data to file.';
         }
     }
-
-
 }
 
 new Frontend_Display();

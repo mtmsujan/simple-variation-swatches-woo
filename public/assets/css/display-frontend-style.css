@@ -11,6 +11,7 @@
   width: 25px;
   height: 25px;
   cursor: pointer;
+  border: 1px solid transparent;
 }
 
 .svsw_label-swatch {
@@ -27,4 +28,8 @@
 
 table.variations tr th.label label{
     display: none;
+}
+
+.svsw_color-swatch.selected, .svsw_label-swatch.selected {
+    border-color: #000;
 }
