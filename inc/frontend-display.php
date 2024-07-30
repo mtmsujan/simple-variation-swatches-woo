@@ -44,10 +44,11 @@ class Frontend_Display {
                 $color = get_term_meta( $term->term_id, 'svsw_color', true ); // Assuming color is saved as term meta
                 if ( $color ) {
                     $html .= sprintf(
-                        '<div class="%s" style="background-color: %s" data-value="%s"> %s </div>',
+                        '<div class="%s" style="background-color: %s" title="%s" data-value="%s"> %s </div>',
                         'svsw_color-swatch',
                         esc_attr( $color ),
                         esc_attr( $term->slug ),
+                        esc_attr( $term->name ),
                         ''
                     );
                 }
@@ -57,9 +58,10 @@ class Frontend_Display {
             $html = '<div class="svsw_label-swatches-container">';
             foreach ( $terms as $term ) {
                 $html .= sprintf(
-                    '<div class="%s" data-value="%s"> %s </div>',
+                    '<div class="%s" data-value="%s" title="%s"> %s </div>',
                     'svsw_label-swatch',
                     esc_attr( $term->slug ),
+                    esc_html( $term->name ),
                     esc_html( $term->name )
                 );
             }

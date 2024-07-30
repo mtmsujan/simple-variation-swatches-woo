@@ -26,9 +26,9 @@
     border-color: #000;
 }
 
-table.variations tr th.label label{
+/* table.variations tr th.label label{
     display: none;
-}
+} */
 
 .svsw_color-swatch.selected, .svsw_label-swatch.selected {
     border-color: #000;
