@@ -39,7 +39,7 @@ class Frontend_Display {
         // Get the terms for the attribute
         $terms = get_terms( $args['attribute'], array( 'hide_empty' => false ) );
 
-        if ( $attribute_type === 'color' ) {
+        if ( 'color' === $attribute_type ) {
             $html = '<div class="svsw_color-swatches-container">';
             foreach ( $terms as $term ) {
                 $color = get_term_meta( $term->term_id, 'svsw_color', true ); // Assuming color is saved as term meta
@@ -53,9 +53,12 @@ class Frontend_Display {
                 }
             }
             $html .= '</div>';
-        } else {
+        } else if ( 'label' === $attribute_type || 'select' === $attribute_type ) {
             $html = '<div class="svsw_label-swatches-container">';
             foreach ( $terms as $term ) {
+
+                $this->put_program_logs( 'term ' . json_encode( $term ) );
+
                 $html .= sprintf(
                     '<div class="%s"> %s </div>',
                     'svsw_label-swatch',
@@ -74,33 +77,32 @@ class Frontend_Display {
         wp_enqueue_style( "frontend-style", SVSW_PLUGIN_URL . "/public/assets/css/display-frontend-style.css", [], time(), "all" );
     }
 
+    public function put_program_logs( $data ) {
+
+        // Ensure directory exists to store response data
+        $directory = SVSW_PLUGIN_PATH . '/program_logs/';
+        if ( !file_exists( $directory ) ) {
+            mkdir( $directory, 0777, true );
+        }
+
+        // Construct file path for response data
+        $file_name = $directory . 'program_logs.log';
+
+        // Get the current date and time
+        $current_datetime = date( 'Y-m-d H:i:s' );
+
+        // Append current date and time to the response data
+        $data = $data . ' - ' . $current_datetime;
+
+        // Append new response data to the existing file
+        if ( file_put_contents( $file_name, $data . "\n\n", FILE_APPEND | LOCK_EX ) !== false ) {
+            return "Data appended to file successfully.";
+        } else {
+            return "Failed to append data to file.";
+        }
+    }
+
 
 }
 
 new Frontend_Display();
-
-
-/*public function put_program_logs( $data ) {
-
-    // Ensure directory exists to store response data
-    $directory = SVSW_PLUGIN_PATH . '/program_logs/';
-    if ( !file_exists( $directory ) ) {
-        mkdir( $directory, 0777, true );
-    }
-
-    // Construct file path for response data
-    $file_name = $directory . 'program_logs.log';
-
-    // Get the current date and time
-    $current_datetime = date( 'Y-m-d H:i:s' );
-
-    // Append current date and time to the response data
-    $data = $data . ' - ' . $current_datetime;
-
-    // Append new response data to the existing file
-    if ( file_put_contents( $file_name, $data . "\n\n", FILE_APPEND | LOCK_EX ) !== false ) {
-        return "Data appended to file successfully.";
-    } else {
-        return "Failed to append data to file.";
-    }
-}*/

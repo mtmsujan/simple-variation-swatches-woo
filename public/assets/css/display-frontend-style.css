@@ -1,13 +1,26 @@
-.svsw_color-swatches-container {
-    display: flex;
-    flex-flow: wrap;
-    padding: 0;
-    width: fit-content;
-    grid-gap: 8px;
+.svsw_color-swatches-container,
+.svsw_label-swatches-container {
+  display: flex;
+  flex-flow: wrap;
+  padding: 0;
+  width: fit-content;
+  grid-gap: 8px;
 }
 
 .svsw_color-swatch {
-    width: 25px;
-    height: 25px;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
+.svsw_label-swatch {
+    border: 1px solid #00000020;
+    padding: 0 10px;
+    font-size: 14px;
     cursor: pointer;
+    border-radius: 5px;
+}
+
+.svsw_label-swatch:hover{
+    border-color: #000;
 }
