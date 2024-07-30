@@ -1,0 +1,165 @@
+
+Args 
+{
+    "options": [
+        "red",
+        "green",
+        "blue"
+    ],
+    "attribute": "pa_color",
+    "product": 
+
+{},
+    "selected": "",
+    "required": false,
+    "name": "",
+    "id": "",
+    "class": "",
+    "show_option_none": "Choose an option"
+} - 2024-07-29 07:07:41
+
+Html "<select id=\"pa_color\" class=\"\" name=\"attribute_pa_color\" data-attribute_name=\"attribute_pa_color\" data-show_option_none=\"yes\"><option value=\"\">Choose an option<\/option><option value=\"blue\" >Blue<\/option><option value=\"green\" >Green<\/option><option value=\"red\" >Red<\/option><\/select>" - 2024-07-29 07:07:41
+
+Args 
+{
+    "options": [
+        "large",
+        "medium",
+        "small"
+    ],
+    "attribute": "pa_size",
+    "product": {},
+    "selected": "",
+    "required": false,
+    "name": "",
+    "id": "",
+    "class": "",
+    "show_option_none": "Choose an option"
+} - 2024-07-29 07:07:41
+
+Html "<select id=\"pa_size\" class=\"\" name=\"attribute_pa_size\" data-attribute_name=\"attribute_pa_size\" data-show_option_none=\"yes\"><option value=\"\">Choose an option<\/option><option value=\"large\" >Large<\/option><option value=\"medium\" >Medium<\/option><option value=\"small\" >Small<\/option><\/select>" - 2024-07-29 07:07:41
+
+Args 
+{
+    "options": [
+        "red",
+        "green",
+        "blue"
+    ],
+    "attribute": "pa_color",
+    "product": {},
+    "selected": "",
+    "required": false,
+    "name": "",
+    "id": "",
+    "class": "",
+    "show_option_none": "Choose an option"
+} - 2024-07-29 07:32:15
+
+Html "<select id=\"pa_color\" class=\"\" name=\"attribute_pa_color\" data-attribute_name=\"attribute_pa_color\" data-show_option_none=\"yes\"><option value=\"\">Choose an option<\/option><option value=\"blue\" >Blue<\/option><option value=\"green\" >Green<\/option><option value=\"red\" >Red<\/option><\/select>" - 2024-07-29 07:32:15
+
+Product {} - 2024-07-29 07:32:15
+
+Args 
+{
+    "options": [
+        "large",
+        "medium",
+        "small"
+    ],
+    "attribute": "pa_size",
+    "product": {},
+    "selected": "",
+    "required": false,
+    "name": "",
+    "id": "",
+    "class": "",
+    "show_option_none": "Choose an option"
+} - 2024-07-29 07:32:15
+
+Html "<select id=\"pa_size\" class=\"\" name=\"attribute_pa_size\" data-attribute_name=\"attribute_pa_size\" data-show_option_none=\"yes\"><option value=\"\">Choose an option<\/option><option value=\"large\" >Large<\/option><option value=\"medium\" >Medium<\/option><option value=\"small\" >Small<\/option><\/select>" - 2024-07-29 07:32:15
+
+Product {} - 2024-07-29 07:32:15
+
+color - 2024-07-29 07:43:21
+
+select - 2024-07-29 07:43:21
+
+Terms Array - 2024-07-29 07:49:55
+
+Terms 
+[
+    {
+        "term_id": 22,
+        "name": "Blue",
+        "slug": "blue",
+        "term_group": 0,
+        "term_taxonomy_id": 22,
+        "taxonomy": "pa_color",
+        "description": "",
+        "parent": 0,
+        "count": 4,
+        "filter": "raw"
+    },
+    {
+        "term_id": 28,
+        "name": "Gray",
+        "slug": "gray",
+        "term_group": 0,
+        "term_taxonomy_id": 28,
+        "taxonomy": "pa_color",
+        "description": "",
+        "parent": 0,
+        "count": 3,
+        "filter": "raw"
+    },
+    {
+        "term_id": 23,
+        "name": "Green",
+        "slug": "green",
+        "term_group": 0,
+        "term_taxonomy_id": 23,
+        "taxonomy": "pa_color",
+        "description": "",
+        "parent": 0,
+        "count": 3,
+        "filter": "raw"
+    },
+    {
+        "term_id": 30,
+        "name": "magenta",
+        "slug": "magenta",
+        "term_group": 0,
+        "term_taxonomy_id": 30,
+        "taxonomy": "pa_color",
+        "description": "",
+        "parent": 0,
+        "count": 0,
+        "filter": "raw"
+    },
+    {
+        "term_id": 24,
+        "name": "Red",
+        "slug": "red",
+        "term_group": 0,
+        "term_taxonomy_id": 24,
+        "taxonomy": "pa_color",
+        "description": "",
+        "parent": 0,
+        "count": 4,
+        "filter": "raw"
+    },
+    {
+        "term_id": 29,
+        "name": "Yellow",
+        "slug": "yellow",
+        "term_group": 0,
+        "term_taxonomy_id": 29,
+        "taxonomy": "pa_color",
+        "description": "",
+        "parent": 0,
+        "count": 1,
+        "filter": "raw"
+    }
+] - 2024-07-29 07:50:13
+
