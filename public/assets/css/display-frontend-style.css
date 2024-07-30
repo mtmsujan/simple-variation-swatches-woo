@@ -1,11 +1,21 @@
 .svsw_color-swatch {
-  border-radius: 20px;
   padding: 5px;
   color: transparent;
   margin-right: 5px;
+  cursor: pointer;
 }
 
 .svsw_color-swatch input[type="radio"] {
-    opacity: 0;
-    visibility: hidden;
+    display: none;
+}
+
+.svsw_label-swatch input[type="radio"]{
+    display: none;
+}
+
+.svsw_label-swatch{
+    border: 1px solid #00000020;
+    padding: 5px 10px;
+    margin-right: 5px;
+    cursor: pointer;
 }

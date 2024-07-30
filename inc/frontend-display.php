@@ -40,34 +40,27 @@ class Frontend_Display {
         $terms = get_terms( $args['attribute'], array( 'hide_empty' => false ) );
 
         if ( $attribute_type === 'color' ) {
-            $html = '<div class="color-swatches">';
+            $html = '<div class="svsw_color-swatches-container">';
             foreach ( $terms as $term ) {
                 $color = get_term_meta( $term->term_id, 'svsw_color', true ); // Assuming color is saved as term meta
                 if ( $color ) {
                     $html .= sprintf(
-                        '<label class="svsw_color-swatch" style="background-color: %s;">
-                            <input type="radio" name="%s" value="%s">
-                            %s
-                        </label>',
+                        '<div class="%s" style="background-color: %s"> %s </div>',
+                        'svsw_color-swatch',
                         esc_attr( $color ),
-                        esc_attr( $args['attribute'] ),
-                        esc_attr( $term->slug ),
-                        ''
+                        esc_html( $term->name )
                     );
                 }
             }
             $html .= '</div>';
         } else {
-            $html = '<div class="label-swatches">';
+            $html = '<div class="svsw_label-swatches-container">';
             foreach ( $terms as $term ) {
                 $html .= sprintf(
-                    '<label class="label-swatch">
-                        <input type="radio" name="%s" value="%s">
-                        %s
-                    </label>',
-                    esc_attr( $args['attribute'] ),
-                    esc_attr( $term->slug ),
+                    '<div class="%s"> %s </div>',
+                    'svsw_label-swatch',
                     esc_html( $term->name )
+
                 );
             }
             $html .= '</div>';
