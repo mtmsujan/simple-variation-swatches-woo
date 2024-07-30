@@ -56,9 +56,6 @@ class Frontend_Display {
         } else if ( 'label' === $attribute_type || 'select' === $attribute_type ) {
             $html = '<div class="svsw_label-swatches-container">';
             foreach ( $terms as $term ) {
-
-                $this->put_program_logs( 'term ' . json_encode( $term ) );
-
                 $html .= sprintf(
                     '<div class="%s"> %s </div>',
                     'svsw_label-swatch',
