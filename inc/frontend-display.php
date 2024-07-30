@@ -8,6 +8,8 @@ class Frontend_Display {
 
     public function setup_hooks() {
         add_filter( 'woocommerce_dropdown_variation_attribute_options_html', [ $this, 'custom_variation_attribute_options_html' ], 10, 2 );
+
+        add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_frontend_assets' ] );
     }
 
     /**
@@ -42,14 +44,14 @@ class Frontend_Display {
             foreach ( $terms as $term ) {
                 $color = get_term_meta( $term->term_id, 'svsw_color', true ); // Assuming color is saved as term meta
                 $html .= sprintf(
-                    '<label class="color-swatch" style="background-color: %s;">
+                    '<label class="svsw_color-swatch" style="background-color: %s;">
                         <input type="radio" name="%s" value="%s">
                         %s
                     </label>',
                     esc_attr( $color ),
                     esc_attr( $args['attribute'] ),
                     esc_attr( $term->slug ),
-                    esc_html( $term->name )
+                    ''
                 );
             }
             $html .= '</div>';
@@ -71,6 +73,13 @@ class Frontend_Display {
 
         return $html;
     }
+
+    public function enqueue_frontend_assets() {
+        // Enqueue frontend style css
+        wp_enqueue_style( "frontend-style", SVSW_PLUGIN_URL . "/public/assets/css/display-frontend-style.css", [], time(), "all" );
+    }
+
+
 }
 
 new Frontend_Display();

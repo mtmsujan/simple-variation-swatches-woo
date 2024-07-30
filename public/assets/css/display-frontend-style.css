@@ -1,0 +1,10 @@
+.svsw_color-swatch {
+  border-radius: 20px;
+  padding: 5px;
+  color: transparent;
+  margin-right: 5px;
+}
+
+.svsw_color-swatch input[type="radio"] {
+    opacity: 0;
+}
