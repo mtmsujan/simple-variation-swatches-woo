@@ -10,3 +10,8 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Transform standard product attribute dropdowns into interactive buttons, color swatches. This plugin offers a user-friendly way for customers to select product variations.
 
+== Description ==
+
+= Introduction =
+
+Transform boring dropdown menus into engaging color, buttons or text swatches, making it effortless for customers to select their desired product options. This plugin adds a touch of style while streamlining the purchasing process.
